@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625927571128",
+    "project_id": "nework-3d207",
+    "storage_bucket": "nework-3d207.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625927571128:android:37b4938e4f0a3fbe8a564d",
+        "android_client_info": {
+          "package_name": "com.klim.nework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625927571128-irsh34vsje6aspsbbb1sr7oa8v4phi62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXg5gIUQTv6mI2aLonKhaKmDtj6WrtQS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625927571128-irsh34vsje6aspsbbb1sr7oa8v4phi62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

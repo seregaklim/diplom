@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="150dp"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    android:elevation="7dp"
+    android:longClickable="true"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/job_rewiev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="tv_job_company, tv_job_link, tv_job_period, tv_job_position" />
+
+        <TextView
+            android:id="@+id/tv_job_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_job_position"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:layout_editor_absoluteX="8dp"
+            tools:text="Netology" />
+
+        <TextView
+            android:id="@+id/tv_job_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_job_period"
+            app:layout_constraintTop_toBottomOf="@+id/tv_job_company"
+            tools:layout_editor_absoluteX="8dp"
+            tools:text="Android developer" />
+
+        <TextView
+            android:id="@+id/tv_job_period"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_job_link"
+            app:layout_constraintTop_toBottomOf="@+id/tv_job_position"
+            tools:layout_editor_absoluteX="8dp"
+            tools:text="20.20.2020 - 20.20.2021" />
+
+        <TextView
+            android:id="@+id/tv_job_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="1dp"
+            android:autoLink="web|email"
+            android:linksClickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_job_period"
+            tools:layout_editor_absoluteX="8dp"
+            tools:text="Netology.ru" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

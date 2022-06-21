@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/your_navigation" >
+        <menu>
+            <item android:title="@string/go_out"
+                android:id="@+id/fabOnSignOut"
+                android:icon="@drawable/logout"/>
+
+            <item android:title="@string/your_page"
+                android:id="@+id/fabPage"
+                android:icon="@drawable/ic_events_24"/>
+
+            <item android:title= "@string/view_posts"
+                android:id="@+id/fabPost"
+                android:icon ="@drawable/post"/>
+
+            <item android:title="@string/view_evets"
+                android:id="@+id/fabEvent"
+                android:icon="@drawable/event"/>
+
+
+            <item android:title= "@string/watch_users"
+                android:id="@+id/fabUsers"
+                android:icon="@drawable/lupa"/>
+
+
+        </menu>
+    </item>
+
+    <item android:title="@string/your_actions">
+
+        <menu>
+            <item android:title="@string/fab_Add_Post"
+                android:id="@+id/fabAddPost"
+                android:icon="@drawable/add_post"/>
+
+            <item android:title="@string/fab_Add_Event"
+                android:id="@+id/fabAddEvent"
+                android:icon="@drawable/add_event"/>
+
+        </menu>
+
+    </item>
+</menu>
+
