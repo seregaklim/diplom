@@ -1,5 +1,6 @@
 package com.klim.nework.dto
 
+import java.time.Instant
 
 
 data class Job(
@@ -7,7 +8,7 @@ data class Job(
     val authorId: Long,
     val name: String = "",
     val position: String = "",
-    val start: Long = 0L,
-    val finish: Long? = null,
+    val start:  Long = 0,
+    val finish: Long =0,
     val link: String? = null,
 )

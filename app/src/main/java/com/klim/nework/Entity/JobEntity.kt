@@ -11,8 +11,8 @@ data class JobEntity(
     var authorId: Long,
     var name: String,
     var position: String,
-    var start: Long,
-    var finish: Long? = null,
+    var start: Long ,
+    var finish: Long ,
     var link: String? = null,
 ) {
     fun toDto() = Job(id, authorId, name, position, start, finish, link)

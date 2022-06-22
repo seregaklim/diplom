@@ -46,7 +46,7 @@ class  JobViewModel @Inject constructor(
 
 
     private val _jobDateTime = MutableLiveData<String?>()
-    val eventDateTime: LiveData<String?>
+    val jobDateTime: LiveData<String?>
         get() = _jobDateTime
 
 

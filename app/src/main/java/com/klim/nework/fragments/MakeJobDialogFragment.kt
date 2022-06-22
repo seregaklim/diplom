@@ -93,7 +93,7 @@ class MakeJobDialogFragment : DialogFragment() {
                 name = company,
                 position = position,
                 start = AndroidUtils.formatDateStringToMillis(dateStart),
-                finish = dateFinished,
+                finish = dateFinished!!,
                 link = link
             )
         )

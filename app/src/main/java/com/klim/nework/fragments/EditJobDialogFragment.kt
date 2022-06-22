@@ -1,38 +1,36 @@
 package com.klim.nework.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.klim.nework.R
 import com.klim.nework.databinding.DialogFragmentMakeJobBinding
-import com.klim.nework.databinding.FragmentMakeEventBinding
-import com.klim.nework.dto.Event
-import com.klim.nework.dto.Job
-import com.klim.nework.fragments.EditJobDialogFragment.Companion.etLink
-import com.klim.nework.fragments.EditJobDialogFragment.Companion.etPosition
-import com.klim.nework.fragments.EditJobDialogFragment.Companion.tvFinish
-import com.klim.nework.fragments.EditJobDialogFragment.Companion.tvStart
 import com.klim.nework.utils.AndroidUtils
+import com.klim.nework.utils.AndroidUtils.formatDateToDateString
 import com.klim.nework.utils.StringArg
 import com.klim.nework.viewModel.JobViewModel
-import com.klim.nework.viewModel.PageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @AndroidEntryPoint
 class EditJobDialogFragment: Fragment() {
 
-
-
-    private val  jobViewModel: JobViewModel by viewModels(
-        ownerProducer = ::requireParentFragment,
+    private val jobViewModel: JobViewModel by viewModels(
+    ownerProducer = ::requireParentFragment,
     )
 
+
+
+    lateinit var binding: DialogFragmentMakeJobBinding
 
     companion object {
         var Bundle.etCompany: String? by StringArg
@@ -42,6 +40,7 @@ class EditJobDialogFragment: Fragment() {
         var Bundle.tvFinish: String? by StringArg
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,12 +53,53 @@ class EditJobDialogFragment: Fragment() {
         )
 
 
-        val name = arguments?.etCompany?.let(binding.etCompany::setText)
-        val position  = arguments?.etPosition?.let(binding.etPosition::setText)
-        val started=  arguments?.tvStart?.let(binding.tvStart::setText)
-        val finished=  arguments?.tvFinish?.let(binding.tvFinish::setText)
-        val  link=  arguments?.etLink?.let(binding.etLink::setText)
+      jobViewModel.jobDateTime.observe(viewLifecycleOwner) { dateTime ->
+            dateTime?.let {
+                binding.tvStart.text = it
+                binding.tvFinish.text = it
+            }
+        }
 
+
+        val calendar = Calendar.getInstance()
+
+        arguments?.etCompany?.let(binding.etCompany::setText)
+        arguments?.etPosition?.let(binding.etPosition::setText)
+         arguments?.tvStart?.let(binding.tvStart::setText)
+         arguments?.tvFinish?.let(binding.tvFinish::setText)
+        arguments?.etLink?.let(binding.etLink::setText)
+
+
+        binding.tvStart.text= formatDateToDateString(calendar.time)
+        binding.tvFinish.text= formatDateToDateString(calendar.time)
+
+
+        binding.tvStart.setOnClickListener {
+
+
+            val calendar = Calendar.getInstance()
+            DateFragment(calendar) { _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+
+                binding.tvStart.text= formatDateToDateString(calendar.time)
+
+            }.show(childFragmentManager, "datePicker")
+
+
+        }
+
+
+        binding.tvFinish.setOnClickListener {
+
+            val calendar = Calendar.getInstance()
+            DateFragment(calendar) { _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+
+                binding.tvFinish.text= formatDateToDateString(calendar.time)
+
+            }.show(childFragmentManager, "datePicker")
+
+        }
 
         binding.buttonCancel.setOnClickListener {
 
@@ -69,27 +109,22 @@ class EditJobDialogFragment: Fragment() {
 
         binding.buttonProve.setOnClickListener {
 
-            val  company = binding.etCompany.text.toString().trim()
-            val  position=  binding.etPosition.text.toString().trim()
+            val  company = binding.etCompany.text.toString()
+            val  position=  binding.etPosition.text.toString()
+            val  link= binding.etLink.text.toString()
 
-
-            val  link= binding.etLink.text.toString().trim()
-
-
-            val  finished = binding.tvFinish.text.toString().trim()
-
-            val  started = binding.tvStart.text.toString().trim()
-
-
+          val started = binding.tvStart.text
+          val finished =binding.tvFinish.text
 
             jobViewModel.editedJob.value?.let {
                 jobViewModel.saveJob(
                     it.copy(
                         name =  company,
                         position= position,
-                        start = started.toLong(),
-                        finish = finished.toLong() ,
+                        start =  AndroidUtils.formatDateStringToMillis(started as String),
+                        finish =   AndroidUtils.formatDateStringToMillis(finished as String) ,
                         link= link
+
                     )
                )
             }
@@ -101,4 +136,5 @@ class EditJobDialogFragment: Fragment() {
 
         return binding.root
     }
+    
 }
